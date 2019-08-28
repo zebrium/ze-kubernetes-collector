@@ -1,6 +1,7 @@
 # ze-kubernetes-collector
-## Installation
-
+## Features
+## Getting Started
+##### Installing
 The commands below install Zebrium log collector as a Kubernetes DaemonSet. It runs one collector instance on each node in a Kubernetes cluster.
 
 1. `kubectl create secret generic zlog-collector-config --from-literal=log-collector-url=https://YOUR_ZE_API_INSTANCE_NAME.zebrium.com --from-literal=auth-token=<YOUR_ZE_API_AUTH_TOKEN>`
@@ -9,12 +10,16 @@ The commands below install Zebrium log collector as a Kubernetes DaemonSet. It r
 After a few minutes, logs should be viewable on Zebrium web UI.
 
 ## Configuration
-You can add labels to your application so the Zebrium UI can display this information. By default, Zebrium's kubernetes log collector uses the following three labels to get software and test information from pods:
+You can add labels to your application that will be displayed and available for filtering in the Zebrium UI.
+##### Setup
+By default, Zebrium's kubernetes log collector uses the following three labels to get software and additional information from pods:
 1. `zebrium.com/branch`: branch of application software
 2. `zebrium.com/build`: build of application software
 3. `zebrium.com/node`: kubernetes node id
 
-## Environment variables
+See sample snippet from deployment.yaml below.
+
+##### Environment variables
 <table>
   <tr>
     <th>Description</th>
@@ -53,7 +58,7 @@ You can add labels to your application so the Zebrium UI can display this inform
   </tr>
 </table>
 
-## Sample deployment.yaml snippet
+##### Sample snippet from deployment.yaml
 
 ```
    spec:
@@ -74,3 +79,5 @@ You can add labels to your application so the Zebrium UI can display this inform
            {{ end }}
 ```
 
+## Usage
+## Testing your installation
