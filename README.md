@@ -9,9 +9,10 @@ The commands below install Zebrium log collector as a Kubernetes DaemonSet. It r
 After a few minutes, logs should be viewable on Zebrium web UI.
 
 ## Configuration
-You can add labels to your application to provide application information so Zebrium UI can display them. By default Zebrium log collector uses the following three labels to get software and test information from pods:
+You can add labels to your application so the Zebrium UI can display this information. By default, Zebrium's kubernetes log collector uses the following three labels to get software and test information from pods:
 1. `zebrium.com/branch`: branch of application software
 2. `zebrium.com/build`: build of application software
+3. `zebrium.com/node`: kubernetes node id
 
 ## Environment variables
 <table>
