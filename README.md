@@ -16,33 +16,33 @@ You can add labels to your application to provide application information so Zeb
 ## Environment variables
 <table>
   <tr>
-    <th>Environment Variable</th>
     <th>Description</th>
+    <th>Environment Variable</th>
     <th>Default Value</th>
   </tr>
   <tr>
-    <td>ZE_LABEL_BRANCH</td>
     <td>Kubernetes pod label name of software branch</td>
-    <td>zebrium.com/branch</td>
+    <td>ZE_LABEL_BRANCH</td>
+    <td>&quot;zebrium.com/branch&quot; label defined in your deployment.yaml file</td>
   </tr>
   <tr>
-    <td>ZE_LABEL_BUILD</td>
     <td>Kubernetes pod label name for software build</td>
-    <td>zebrium.com/build</td>
+    <td>ZE_LABEL_BUILD</td>
+    <td>&quot;zebrium.com/build&quot; label defined in your deployment.yaml file</td>
   </tr>
   <tr>
-    <td>CONTAINER_LOGS_PATH</td>
     <td>Path to Kubernetes container log directory </td>
+    <td>CONTAINER_LOGS_PATH</td>
     <td>/var/log/containers/*.log</td>
   </tr>
   <tr>
-    <td>EXCLUDE_NAMESPACE_REGEX</td>
     <td>Regular expression of name spaces to be excluded from log collecting</td>
+    <td>EXCLUDE_NAMESPACE_REGEX</td>
     <td>&quot;&quot;</td>
   </tr>
   <tr>
-    <td>EXCLUDE_POD_REGEX</td>
     <td>Regular expression of pods to be excluded from log collecting</td>
+    <td>EXCLUDE_POD_REGEX</td>
     <td>&quot;&quot;</td>
   </tr>
 </table>
