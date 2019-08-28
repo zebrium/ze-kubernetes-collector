@@ -84,3 +84,5 @@ See sample snippet from deployment.yaml below.
 
 ## Testing your installation
 Once the collector has been deployed in your Kubernetes environment, your logs and anomaly detection will be available in the Zebrium UI.
+## Contributors
+* Brady Zuo (Zebrium)
