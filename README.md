@@ -1,5 +1,8 @@
 # ze-kubernetes-collector
 ## Features
+* Two step deployment using Kubernetes commands
+* Sends logs from all Pods/Containers in a Kubernetes clusters
+* Runs a single instance of the collector per node in a Kubernetes cluster
 ## Getting Started
 ##### Installing
 The commands below install Zebrium log collector as a Kubernetes DaemonSet. It runs one collector instance on each node in a Kubernetes cluster.
@@ -79,5 +82,5 @@ See sample snippet from deployment.yaml below.
            {{ end }}
 ```
 
-## Usage
 ## Testing your installation
+Once the collector has been deployed in your Kubernetes environment, your logs and anomaly detection will be available in the Zebrium UI.
