@@ -23,12 +23,17 @@ You can add labels to your application to provide application information so Zeb
   <tr>
     <td>Kubernetes pod label name of software branch</td>
     <td>ZE_LABEL_BRANCH</td>
-    <td>&quot;zebrium.com/branch&quot; label defined in your deployment.yaml file</td>
+    <td>&quot;zebrium.com/branch&quot; label defined in your deployment.yaml file (see sample snippet below) </td>
   </tr>
   <tr>
     <td>Kubernetes pod label name for software build</td>
     <td>ZE_LABEL_BUILD</td>
-    <td>&quot;zebrium.com/build&quot; label defined in your deployment.yaml file</td>
+    <td>&quot;zebrium.com/build&quot; label defined in your deployment.yaml file (see sample snippet below)</td>
+  </tr>
+  <tr>
+    <td>Kubernetes node id</td>
+    <td><b>None</b></td>
+    <td>&quot;zebrium.com/node&quot; label defined in your deployment.yaml file (see sample snippet below)</td>
   </tr>
   <tr>
     <td>Path to Kubernetes container log directory </td>
@@ -46,3 +51,22 @@ You can add labels to your application to provide application information so Zeb
     <td>&quot;&quot;</td>
   </tr>
 </table>
+## Sample deployment.yaml snippet
+```
+   spec:
+     selector:
+       matchLabels:
+         app: zapp
+     replicas: 1
+     template:
+       metadata:
+         labels:
+           app: zapp
+           app.kubernetes.io/name: {{ template "zapp.name" . }}
+           app.kubernetes.io/instance: {{ .Release.Name | quote }}
+           zebrium.com/build: {{ .Values.software.release }}            <-----
+           zebrium.com/branch: {{ .Values.software.branch }}            <-----
+           {{ if ne .Values.node "" }}
+           zebrium.com/node: {{ .Values.node }}                         <-----
+           {{ end }}
+```
