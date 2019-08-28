@@ -51,7 +51,9 @@ You can add labels to your application to provide application information so Zeb
     <td>&quot;&quot;</td>
   </tr>
 </table>
+
 ## Sample deployment.yaml snippet
+
 ```
    spec:
      selector:
@@ -70,3 +72,4 @@ You can add labels to your application to provide application information so Zeb
            zebrium.com/node: {{ .Values.node }}                         <-----
            {{ end }}
 ```
+
