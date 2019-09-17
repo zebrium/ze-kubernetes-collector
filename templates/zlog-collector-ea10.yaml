@@ -1,0 +1,115 @@
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: fluentd
+
+---
+apiVersion: rbac.authorization.k8s.io/v1beta1
+kind: ClusterRole
+metadata:
+  name: fluentd
+rules:
+- apiGroups:
+  - ""
+  resources:
+  - namespaces
+  - pods
+  verbs:
+  - get
+  - list
+  - watch
+
+---
+kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1beta1
+metadata:
+  name: fluentd
+roleRef:
+  kind: ClusterRole
+  name: fluentd
+  apiGroup: rbac.authorization.k8s.io
+subjects:
+- kind: ServiceAccount
+  name: fluentd
+  # This namespace setting will limit fluentd to watching/listing/getting pods in the default namespace. If you want it to be able to log your kube-system namespace as well, comment the line out.
+  namespace: default
+
+---
+apiVersion: extensions/v1beta1
+kind: DaemonSet
+metadata:
+  name: zlog-collector
+spec:
+  template:
+    metadata:
+      labels:
+        app: zlog-collector
+        zebrium.com/exclude: ""
+    spec:
+      serviceAccountName: fluentd
+      containers:
+      - name: zlog-collector
+        image: zebrium/zlog-collector:ea10-rc1
+        imagePullPolicy: IfNotPresent
+        env:
+        - name: ZE_LOG_COLLECTOR_URL
+          valueFrom:
+            secretKeyRef:
+              name: zlog-collector-config
+              key: log-collector-url
+        - name: ZE_LOG_COLLECTOR_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: zlog-collector-config
+              key: auth-token
+        - name: EXCLUDE_POD_REGEX
+          value: ""
+        - name: TAIL_FROM_HEAD
+          value: "true"
+        - name: FLUENTD_LOG_FILE
+          value: ""
+        - name: ZE_LOG_LEVEL
+          value: "info"
+        - name: NODE_LOGS_PATH
+          value: "/var/log/*.log,/var/log/syslog"
+        - name: EXCLUDE_PATH
+          value: "[\"/var/log/boot.log\",\"/var/log/lastlog\"]"
+        - name: FLUSH_INTERVAL
+          value: "30s"
+        resources:
+          requests:
+            cpu: 20m
+          limits:
+            memory: 500Mi
+        volumeMounts:
+        - name: host-var-logs
+          mountPath: /var/log/
+          readOnly: true
+        - name: host-var-lib-docker
+          mountPath: /var/lib/docker/
+          readOnly: true
+        - name: host-var-cache
+          mountPath: /mnt/var/cache/
+        - name: host-etc-osrelease
+          mountPath: /mnt/etc/os-release
+          readOnly: true
+        - name: host-etc-hostname
+          mountPath: /mnt/etc/hostname
+          readOnly: true
+      volumes:
+      - name: host-var-logs
+        hostPath:
+          path: /var/log
+      - name: host-var-cache
+        hostPath:
+          path: /var/cache
+      - name: host-var-lib-docker
+        hostPath:
+          path: /var/lib/docker
+      - name: host-etc-osrelease
+        hostPath:
+          path: /etc/os-release
+      - name: host-etc-hostname
+        hostPath:
+          path: /etc/hostname
