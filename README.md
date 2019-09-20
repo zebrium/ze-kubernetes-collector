@@ -20,7 +20,7 @@ No special configuration is required
 By default, Zebrium's kubernetes log collector will be deployed to all Nodes in your cluster and collect logs from each container.
 
 Additionally, each log line will have associated meta data from your Kubernetes deployment viewable in the Zebrium UI. This meta data will include:
-1. All Kubernetes Identifier tags such as Node, Pod Name and Id, Container Name and Id, Namespace, etc..
+1. All Kubernetes Identifier tags such as Node, Pod Name and Id, Container Name and Id, Namespace, etc.
 2. All Kubernetss Labels
 3. All Kubernetes Annotations
 
