@@ -50,7 +50,7 @@ spec:
       serviceAccountName: fluentd
       containers:
       - name: zlog-collector
-        image: zebrium/zlog-collector:ea10-rc1
+        image: zebrium/zlog-collector:ea10
         imagePullPolicy: IfNotPresent
         env:
         - name: ZE_LOG_COLLECTOR_URL
