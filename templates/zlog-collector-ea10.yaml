@@ -51,7 +51,7 @@ spec:
       containers:
       - name: zlog-collector
         image: zebrium/zlog-collector:ea10
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Always
         env:
         - name: ZE_LOG_COLLECTOR_URL
           valueFrom:
