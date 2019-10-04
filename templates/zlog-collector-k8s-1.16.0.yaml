@@ -2,13 +2,13 @@
 apiVersion: v1
 kind: ServiceAccount
 metadata:
-  name: fluentd
+  name: zlog-collector
 
 ---
 apiVersion: rbac.authorization.k8s.io/v1beta1
 kind: ClusterRole
 metadata:
-  name: fluentd
+  name: zlog-collector
 rules:
 - apiGroups:
   - ""
@@ -24,32 +24,35 @@ rules:
 kind: ClusterRoleBinding
 apiVersion: rbac.authorization.k8s.io/v1beta1
 metadata:
-  name: fluentd
+  name: zlog-collector
 roleRef:
   kind: ClusterRole
-  name: fluentd
+  name: zlog-collector
   apiGroup: rbac.authorization.k8s.io
 subjects:
 - kind: ServiceAccount
-  name: fluentd
+  name: zlog-collector
   namespace: default
 
 ---
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: DaemonSet
 metadata:
   name: zlog-collector
 spec:
+  selector:
+    matchLabels:
+      app: zlog-collector
   template:
     metadata:
       labels:
         app: zlog-collector
         zebrium.com/exclude: ""
     spec:
-      serviceAccountName: fluentd
+      serviceAccountName: zlog-collector
       containers:
       - name: zlog-collector
-        image: zebrium/zlog-collector:ea10
+        image: zebrium/zlog-collector:latest
         imagePullPolicy: Always
         env:
         - name: ZE_LOG_COLLECTOR_URL
