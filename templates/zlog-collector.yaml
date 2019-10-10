@@ -74,7 +74,7 @@ spec:
         - name: ZE_LOG_LEVEL
           value: "info"
         - name: NODE_LOGS_PATH
-          value: "/var/log/*.log,/var/log/syslog"
+          value: "/var/log/*.log,/var/log/syslog,/var/log/messages"
         - name: EXCLUDE_PATH
           value: "[\"/var/log/boot.log\",\"/var/log/lastlog\"]"
         - name: FLUSH_INTERVAL
@@ -87,6 +87,9 @@ spec:
         volumeMounts:
         - name: host-var-logs
           mountPath: /var/log/
+          readOnly: true
+        - name: host-run-log
+          mountPath: /run/log/
           readOnly: true
         - name: host-var-lib-docker
           mountPath: /var/lib/docker/
@@ -103,6 +106,9 @@ spec:
       - name: host-var-logs
         hostPath:
           path: /var/log
+      - name: host-run-log
+        hostPath:
+          path: /run/log
       - name: host-var-cache
         hostPath:
           path: /var/cache
