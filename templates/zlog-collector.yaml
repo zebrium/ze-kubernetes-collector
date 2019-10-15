@@ -82,8 +82,9 @@ spec:
         resources:
           requests:
             cpu: 20m
-          limits:
             memory: 500Mi
+          limits:
+            memory: 1Gi
         volumeMounts:
         - name: host-var-logs
           mountPath: /var/log/
