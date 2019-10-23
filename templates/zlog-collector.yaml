@@ -79,6 +79,8 @@ spec:
           value: "[\"/var/log/boot.log\",\"/var/log/lastlog\"]"
         - name: FLUSH_INTERVAL
           value: "30s"
+        - name: VERIFY_SSL
+          value: "true"
         resources:
           requests:
             cpu: 20m
@@ -103,6 +105,9 @@ spec:
         - name: host-etc-hostname
           mountPath: /mnt/etc/hostname
           readOnly: true
+        - name: host-etc-localtime
+          mountPath: /etc/localtime
+          readOnly: true
       volumes:
       - name: host-var-logs
         hostPath:
@@ -122,3 +127,6 @@ spec:
       - name: host-etc-hostname
         hostPath:
           path: /etc/hostname
+      - name: host-etc-localtime
+        hostPath:
+          path: /etc/localtime
