@@ -65,6 +65,8 @@ spec:
             secretKeyRef:
               name: zlog-collector-config
               key: auth-token
+        - name: ZE_DEPLOYMENT_NAME
+          value: ""
         - name: EXCLUDE_POD_REGEX
           value: ""
         - name: TAIL_FROM_HEAD
