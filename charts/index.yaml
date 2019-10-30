@@ -1,0 +1,13 @@
+apiVersion: v1
+entries:
+  alpine:
+    - created: 2019-10-30T11:30:00.000000001-07:00
+      description: Zebrium log collector
+      digest: 40914a1fa4479ff2a8dfb4095a39f434b862bd3565af16314547a1515678cf8c
+      home: https://github.com/zebrium/ze-kubernetes-collector
+      name: zlog-collector
+      sources:
+      - https://github.com/zebrium/ze-kubernetes-collector
+      urls:
+      - https://raw.githubusercontent.com/zebrium/ze-kubernetes-collector/master/charts/zlog-collector-1.11.0.tgz
+      version: 1.11.0
