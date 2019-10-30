@@ -1,0 +1,119 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: {{ template "zlog-collector.fullname" . }}
+  labels:
+    app: {{ template "zlog-collector.name" . }}
+    chart: {{ .Chart.Name }}-{{ .Chart.Version }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+spec:
+  selector:
+    matchLabels:
+      app: {{ template "zlog-collector.name" . }}
+  template:
+    metadata:
+      name: {{ template "zlog-collector.fullname" . }}
+      labels:
+        app: {{ template "zlog-collector.name" . }}
+        release: {{ .Release.Name }}
+    spec:
+      serviceAccountName: {{ template "zlog-collector.fullname" . }}
+      {{- if .Values.daemonset.priorityClassName }}
+      priorityClassName: {{ .Values.daemonset.priorityClassName }}
+      {{- end }}
+      containers:
+        - name: {{ template "zlog-collector.fullname" . }}
+          image: "{{ .Values.image.name }}:{{ .Values.image.tag }}"
+{{- if eq .Values.zebrium.autoupdate "1" }}
+          imagePullPolicy: "always"
+{{- else }}
+          imagePullPolicy: "{{.Values.image.pullPolicy}}"
+{{- end }}
+          resources:
+{{ toYaml .Values.resources | indent 12 }}
+          env:
+            - name: ZE_LOG_COLLECTOR_URL
+              valueFrom:
+                secretKeyRef:
+                  name: {{ template "zlog-collector.fullname" . }}-config
+                  key: log-collector-url
+            - name: ZE_LOG_COLLECTOR_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: {{ template "zlog-collector.fullname" . }}-config
+                  key: auth-token
+            - name: ZE_DEPLOYMENT_NAME
+              value: "{{ .Values.zebrium.deployment }}"
+            - name: EXCLUDE_POD_REGEX
+              value: ""
+            - name: TAIL_FROM_HEAD
+              value: "true"
+            - name: FLUENTD_LOG_FILE
+              value: ""
+            - name: ZE_LOG_LEVEL
+              value: "info"
+            - name: NODE_LOGS_PATH
+              value: "/var/log/*.log,/var/log/syslog,/var/log/messages"
+            - name: EXCLUDE_PATH
+              value: "[\"/var/log/boot.log\",\"/var/log/lastlog\"]"
+            - name: FLUSH_INTERVAL
+              value: "30s"
+            - name: VERIFY_SSL
+              value: "false"
+{{- if .Values.extraEnv }}
+{{ toYaml .Values.extraEnv | indent 12 }}
+{{- end }}
+          volumeMounts:
+            - name: host-var-logs
+              mountPath: /var/log/
+              readOnly: true
+            - name: host-run-log
+              mountPath: /run/log/
+              readOnly: true
+            - name: host-var-lib-docker
+              mountPath: /var/lib/docker/
+              readOnly: true
+            - name: host-var-cache
+              mountPath: /mnt/var/cache/
+            - name: host-etc-osrelease
+              mountPath: /mnt/etc/os-release
+              readOnly: true
+            - name: host-etc-hostname
+              mountPath: /mnt/etc/hostname
+              readOnly: true
+            - name: host-etc-localtime
+              mountPath: /etc/localtime
+              readOnly: true
+      volumes:
+      - name: host-var-logs
+        hostPath:
+          path: /var/log
+      - name: host-run-log
+        hostPath:
+          path: /run/log
+      - name: host-var-cache
+        hostPath:
+          path: /var/cache
+      - name: host-var-lib-docker
+        hostPath:
+          path: /var/lib/docker
+      - name: host-etc-osrelease
+        hostPath:
+          path: /etc/os-release
+      - name: host-etc-hostname
+        hostPath:
+          path: /etc/hostname
+      - name: host-etc-localtime
+        hostPath:
+          path: /etc/localtime
+    {{- if .Values.daemonset.tolerations }}
+      tolerations:
+    {{ toYaml .Values.daemonset.tolerations | indent 8 }}
+    {{- end }}
+    {{- if .Values.daemonset.nodeSelector }}
+      nodeSelector:
+    {{ toYaml .Values.daemonset.nodeSelector | indent 8 }}
+    {{- end }}
+  updateStrategy:
+    type: "{{ .Values.updateStrategy }}"

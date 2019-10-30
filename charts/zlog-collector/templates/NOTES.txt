@@ -1,0 +1,14 @@
+{{- if not .Values.zebrium.authToken -}}
+#############################################################
+###  ERROR: Please specify an authentication token        ###
+#############################################################
+
+helm install {{ .Release.Name }} \
+  --set zebrium.collectorUrl=ZE_API_URL,zebrium.authToken=YOUR_ZE_API_AUTH_TOKEN zlog-collector
+
+{{- else -}}
+
+Zebrium log collector are being deployed. Logs should appear in Zebrium portal
+soon.
+
+{{- end }}

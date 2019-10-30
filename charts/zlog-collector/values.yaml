@@ -1,0 +1,31 @@
+image:
+  name: zebrium/zlog-collector
+  tag: latest
+  pullPolicy: Always
+
+# Extra environment variables to set for log collector container
+extraEnv: []
+
+zebrium:
+  deployment: ""
+  collectorUrl: ""
+  authToken: ""
+  autoupdate: "0"
+  name: zlog-collector
+
+resources:
+  requests:
+    cpu: 20m
+    memory: 500Mi
+  limits:
+    memory: 1Gi
+
+updateStrategy: OnDelete
+
+daemonset:
+  # Allow the DaemonSet to schedule on tainted nodes
+  tolerations: []
+  # Deploy on selected nodes
+  nodeSelector: {}
+  priorityClassName: ""
+
