@@ -22,7 +22,6 @@ spec:
       {{- if .Values.daemonset.priorityClassName }}
       priorityClassName: {{ .Values.daemonset.priorityClassName }}
       {{- end }}
-      dnsPolicy: {{ .Values.daemonset.dnsPolicy }}
       containers:
         - name: {{ template "zlog-collector.fullname" . }}
           image: "{{ .Values.image.name }}:{{ .Values.image.tag }}"
