@@ -9,5 +9,5 @@ metadata:
     heritage: "{{ .Release.Service }}"
 rules:
 - apiGroups: [""]
-  resources: ["namespaces", "pods"]
+  resources: ["namespaces", "deployments", "pods", "events"]
   verbs: ["get", "list", "watch"]

@@ -28,4 +28,5 @@ daemonset:
   # Deploy on selected nodes
   nodeSelector: {}
   priorityClassName: ""
+  dnsPolicy: "ClusterFirst"
 
