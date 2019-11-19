@@ -14,7 +14,9 @@ rules:
   - ""
   resources:
   - namespaces
+  - deployments
   - pods
+  - events
   verbs:
   - get
   - list
