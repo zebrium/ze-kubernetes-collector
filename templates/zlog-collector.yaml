@@ -78,7 +78,7 @@ spec:
         - name: ZE_LOG_LEVEL
           value: "info"
         - name: NODE_LOGS_PATH
-          value: "/var/log/*.log,/var/log/syslog,/var/log/messages"
+          value: "/var/log/*.log,/var/log/syslog,/var/log/messages,/var/log/secure"
         - name: EXCLUDE_PATH
           value: "[\"/var/log/boot.log\",\"/var/log/lastlog\"]"
         - name: FLUSH_INTERVAL
