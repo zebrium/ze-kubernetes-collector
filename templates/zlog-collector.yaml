@@ -68,7 +68,7 @@ spec:
               name: zlog-collector-config
               key: auth-token
         - name: ZE_DEPLOYMENT_NAME
-          value: ""
+          value: "unset"
         - name: EXCLUDE_POD_REGEX
           value: ""
         - name: TAIL_FROM_HEAD

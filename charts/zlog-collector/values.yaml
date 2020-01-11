@@ -7,7 +7,7 @@ image:
 extraEnv: []
 
 zebrium:
-  deployment: ""
+  deployment: "unset"
   collectorUrl: ""
   authToken: ""
   autoupdate: "0"
