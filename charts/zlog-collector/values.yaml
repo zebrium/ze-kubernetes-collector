@@ -7,11 +7,22 @@ image:
 extraEnv: []
 
 zebrium:
+  name: zlog-collector
   deployment: "unset"
   collectorUrl: ""
   authToken: ""
   autoupdate: "0"
-  name: zlog-collector
+  verifySSL: "true"
+  excludePodRegex: ""
+  tailFromHead: "true"
+  logFile: ""
+  logLevel: "info"
+  nodeLogsPath: "/var/log/*.log,/var/log/syslog,/var/log/messages,/var/log/secure"
+  excludePath: "[\"/var/log/boot.log\",\"/var/log/lastlog\"]"
+  flushInterval: "30s"
+
+secret:
+  enabled: true
 
 resources:
   requests:

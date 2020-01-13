@@ -46,21 +46,21 @@ spec:
             - name: ZE_DEPLOYMENT_NAME
               value: "{{ .Values.zebrium.deployment }}"
             - name: EXCLUDE_POD_REGEX
-              value: ""
+              value: "{{ .Values.zebrium.excludePodRegex }}"
             - name: TAIL_FROM_HEAD
-              value: "true"
+              value: "{{ .Values.zebrium.tailFromHead }}"
             - name: FLUENTD_LOG_FILE
-              value: ""
+              value: "{{ .Values.zebrium.logFile }}"
             - name: ZE_LOG_LEVEL
-              value: "info"
+              value: "{{ .Values.zebrium.logLevel }}"
             - name: NODE_LOGS_PATH
-              value: "/var/log/*.log,/var/log/syslog,/var/log/messages,/var/log/secure"
+              value: "{{ .Values.zebrium.nodeLogsPath }}"
             - name: EXCLUDE_PATH
-              value: "[\"/var/log/boot.log\",\"/var/log/lastlog\"]"
+              value: {{quote .Values.zebrium.excludePath }}
             - name: FLUSH_INTERVAL
-              value: "30s"
+              value: "{{ .Values.zebrium.flushInterval }}"
             - name: VERIFY_SSL
-              value: "false"
+              value: "{{ .Values.zebrium.verifySSL }}"
 {{- if .Values.extraEnv }}
 {{ toYaml .Values.extraEnv | indent 12 }}
 {{- end }}
