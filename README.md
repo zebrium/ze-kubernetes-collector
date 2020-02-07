@@ -15,7 +15,12 @@ After a few minutes, logs should be viewable on Zebrium web UI.
 
 ##### Installing via helm
 
+###### helm version 2
 `helm install --namespace zebrium  --name zlog-collector --set zebrium.deployment=YOUR_DEPLOYMENT_NAME,zebrium.collectorUrl=YOUR_ZE_API_URL,zebrium.authToken=YOUR_ZE_API_AUTH_TOKEN --repo https://raw.githubusercontent.com/zebrium/ze-kubernetes-collector/master/charts zlog-collector`
+
+###### helm version 3
+1. `kubectl create namespace zebrium`
+2. `helm install zlog-collector zlog-collector --namespace zebrium --set zebrium.deployment=YOUR_DEPLOYMENT_NAME,zebrium.collectorUrl=YOUR_ZE_API_URL,zebrium.authToken=YOUR_ZE_API_AUTH_TOKEN --repo https://raw.githubusercontent.com/zebrium/ze-kubernetes-collector/master/charts`
 
 ## Configuration
 No special configuration is required
