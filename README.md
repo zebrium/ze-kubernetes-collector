@@ -13,6 +13,14 @@ The commands below install Zebrium log collector as a Kubernetes DaemonSet. It r
 
 After a few minutes, logs should be viewable on Zebrium web UI.
 
+The commands above install zlog-collector in default namespace. To install it in a separate namespace, follow the folowing instructions:
+
+1. `kubectl create namespace <new_namespace_name>`. Replace `<new_namespace_name>` with your real namespace name.
+2. `kubectl create secret generic zlog-collector-config --from-literal=log-collector-url=YOUR_ZE_API_URL --from-literal=auth-token=YOUR_ZE_API_AUTH_TOKEN --namespace <new_namespace_name>`
+3. `wget https://raw.githubusercontent.com/zebrium/ze-kubernetes-collector/master/templates/zlog-collector.yaml`
+4. Edit the downloaded `zlog-collector.yaml`, change `namespace: default` in the file to `namespace: <new_namespace_name>` (on one line).
+5. `kubectl create -f zlog-collector.yaml --namespace <new_namespace_name>`
+
 ##### Installing via helm
 
 ###### helm version 2
