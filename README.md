@@ -1,9 +1,3 @@
----
-layout: page
-title: Kubernetes
-parent: Setup
-nav_order: 2
----
 # KUBERNETES COLLECTOR DETAILS
 Zebrium's Kubernetes collector sends logs to Zebrium for automated Anomaly detection.
 Our github repository is located [here](https://github.com/zebrium/ze-kubernetes-collector).
