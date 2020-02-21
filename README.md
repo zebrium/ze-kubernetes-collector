@@ -1,3 +1,13 @@
+---
+layout: page
+title: Kubernetes
+parent: Setup
+nav_order: 2
+---
+# KUBERNETES COLLECTOR DETAILS
+Zebrium's Kubernetes collector sends logs to Zebrium for automated Anomaly detection.
+Our github repository is located [here](https://github.com/zebrium/ze-kubernetes-collector).
+
 # ze-kubernetes-collector
 ## Features
 * Two step deployment using Kubernetes commands
@@ -5,8 +15,8 @@
 * Runs a single instance of the collector per node in a Kubernetes cluster
 
 ## Getting Started
-##### Installing via kubectl
-The commands below install Zebrium log collector as a Kubernetes DaemonSet. It runs one collector instance on each node in a Kubernetes cluster.
+### Installing via kubectl
+The commands below install the Zebrium log collector as a Kubernetes DaemonSet. It runs one collector instance on each node in a Kubernetes cluster.
 
 1. `kubectl create secret generic zlog-collector-config --from-literal=log-collector-url=YOUR_ZE_API_URL --from-literal=auth-token=YOUR_ZE_API_AUTH_TOKEN`
 2. `kubectl create -f https://raw.githubusercontent.com/zebrium/ze-kubernetes-collector/master/templates/zlog-collector.yaml`
@@ -21,24 +31,38 @@ The commands above install zlog-collector in default namespace. To install it in
 4. Edit the downloaded `zlog-collector.yaml`, change `namespace: default` in the file to `namespace: <new_namespace_name>` (on one line).
 5. `kubectl create -f zlog-collector.yaml --namespace <new_namespace_name>`
 
-##### Installing via helm
+### Uninstalling via kubectl
+The commands below will uninstall the Zebrium log collector. This would typically be done prior to installing a newer version of the collector.
+```
+kubectl delete -f https://raw.githubusercontent.com/zebrium/ze-kubernetes-collector/master/templates/zlog-collector.yaml
+kubectl delete secret zlog-collector-config
+```
+**Note:** You do not have to delete the secret if there is no change in URL and token when installing an upgraded collector.
 
-###### helm version 2
-1. `helm install --namespace zebrium  --name zlog-collector --set zebrium.deployment=YOUR_DEPLOYMENT_NAME,zebrium.collectorUrl=YOUR_ZE_API_URL,zebrium.authToken=YOUR_ZE_API_AUTH_TOKEN --repo https://raw.githubusercontent.com/zebrium/ze-kubernetes-collector/master/charts zlog-collector`
+### Installing via helm
+#### helm version 2
+1. `helm install --namespace zebrium --name zlog-collector --repo https://raw.githubusercontent.com/zebrium/ze-kubernetes-collector/master/charts zlog-collector --set zebrium.collectorUrl=YOUR_ZE_API_URL,zebrium.authToken=YOUR_ZE_API_AUTH_TOKEN,zebrium.deployment=YOUR_DEPLOYMENT_NAME`
 
-###### helm version 3
+#### helm version 3
 1. `kubectl create namespace zebrium`
-2. `helm install zlog-collector zlog-collector --namespace zebrium --set zebrium.deployment=YOUR_DEPLOYMENT_NAME,zebrium.collectorUrl=YOUR_ZE_API_URL,zebrium.authToken=YOUR_ZE_API_AUTH_TOKEN --repo https://raw.githubusercontent.com/zebrium/ze-kubernetes-collector/master/charts`
+2. `helm install zlog-collector zlog-collector --namespace zebrium --repo https://raw.githubusercontent.com/zebrium/ze-kubernetes-collector/master/charts --set zebrium.collectorUrl=YOUR_ZE_API_URL,zebrium.authToken=YOUR_ZE_API_AUTH_TOKEN,zebrium.deployment=YOUR_DEPLOYMENT_NAME`
+
+### Uninstalling via helm
+
+If you used the "helm install" command to install zlog-collector chart, you should use the following command to delete:
+```
+helm delete --purge zlog-collector
+```
 
 ## Configuration
 No special configuration is required
 
-##### Setup
+### Setup
 By default, Zebrium's kubernetes log collector will be deployed to all Nodes in your cluster and collect logs from each container.
 
 Additionally, each log line will have associated meta data from your Kubernetes deployment viewable in the Zebrium UI. This meta data will include:
 1. All Kubernetes Identifier tags such as Node, Pod Name and Id, Container Name and Id, Namespace, etc.
-2. All Kubernetss Labels
+2. All Kubernetes Labels
 3. All Kubernetes Annotations
 
 ## Testing your installation
