@@ -26,7 +26,7 @@ spec:
         - name: {{ template "zlog-collector.fullname" . }}
           image: "{{ .Values.image.name }}:{{ .Values.image.tag }}"
 {{- if eq .Values.zebrium.autoupdate "1" }}
-          imagePullPolicy: "always"
+          imagePullPolicy: "Always"
 {{- else }}
           imagePullPolicy: "{{.Values.image.pullPolicy}}"
 {{- end }}

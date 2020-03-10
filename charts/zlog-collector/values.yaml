@@ -11,7 +11,7 @@ zebrium:
   deployment: "unset"
   collectorUrl: ""
   authToken: ""
-  autoupdate: "0"
+  autoupdate: "1"
   verifySSL: "true"
   excludePodRegex: ""
   tailFromHead: "true"
