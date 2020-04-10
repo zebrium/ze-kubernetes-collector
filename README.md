@@ -62,5 +62,10 @@ Additionally, each log line will have associated meta data from your Kubernetes 
 ## Testing your installation
 Once the collector has been deployed in your Kubernetes environment, your logs and anomaly detection will be available in the Zebrium UI.
 
+## Troubleshooting
+In the event that Zebrium requires the ze_collector logs for troubleshooting, you can use these commands:
+1. Use: `kubectl get pods --namespace zebrium` to get the zlog-collector pod names first.
+2. Use: `kubectl logs <pod_name> --namespace zebrium` to get logs. **Note:** There may be multiple pods containing logs.
+
 ## Contributors
 * Brady Zuo (Zebrium)
