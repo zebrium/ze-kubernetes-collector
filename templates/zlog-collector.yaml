@@ -83,6 +83,18 @@ spec:
           value: "[\"/var/log/boot.log\",\"/var/log/lastlog\"]"
         - name: FLUSH_INTERVAL
           value: "30s"
+        - name: BUFFER_CHUNK_LIMIT_SIZE
+          value: "8MB"
+        - name: BUFFER_CHUNK_LIMIT_RECORDS
+          value: "40000"
+        - name: BUFFER_TOTAL_LIMIT_SIZE
+          value: "8GB"
+        - name: BUFFER_RETRY_TIMEOUT
+          value: "1h"
+        - name: BUFFER_RETRY_MAX_TIMES
+          value: "360"
+        - name: BUFFER_RETRY_WAIT
+          value: "10s"
         - name: VERIFY_SSL
           value: "true"
         resources:

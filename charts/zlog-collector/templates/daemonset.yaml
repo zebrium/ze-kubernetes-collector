@@ -59,6 +59,18 @@ spec:
               value: {{quote .Values.zebrium.excludePath }}
             - name: FLUSH_INTERVAL
               value: "{{ .Values.zebrium.flushInterval }}"
+            - name: BUFFER_CHUNK_LIMIT_SIZE
+              value: "{{ .Values.zebrium.bufferChunkLimitSize }}"
+            - name: BUFFER_CHUNK_LIMIT_RECORDS
+              value: "{{ .Values.zebrium.bufferChunkLimitRecords }}"
+            - name: BUFFER_TOTAL_LIMIT_SIZE
+              value: "{{ .Values.zebrium.bufferTotalLimitSize }}"
+            - name: BUFFER_RETRY_TIMEOUT
+              value: "{{ .Values.zebrium.bufferRetryTimeout }}"
+            - name: BUFFER_RETRY_MAX_TIMES
+              value: "{{ .Values.zebrium.bufferRetryMaxTimes }}"
+            - name: BUFFER_RETRY_WAIT
+              value: "{{ .Values.zebrium.bufferRetryWait }}"
             - name: VERIFY_SSL
               value: "{{ .Values.zebrium.verifySSL }}"
 {{- if .Values.extraEnv }}

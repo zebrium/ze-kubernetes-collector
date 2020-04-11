@@ -20,6 +20,12 @@ zebrium:
   nodeLogsPath: "/var/log/*.log,/var/log/syslog,/var/log/messages,/var/log/secure"
   excludePath: "[\"/var/log/boot.log\",\"/var/log/lastlog\"]"
   flushInterval: "30s"
+  bufferChunkLimitSize: 8MB
+  bufferChunkLimitRecords: 40000
+  bufferTotalLimitSize: 8GB
+  bufferRetryTimeout: 1h
+  bufferRetryMaxTimes: 360
+  bufferRetryWait: 10s
 
 secret:
   enabled: true
