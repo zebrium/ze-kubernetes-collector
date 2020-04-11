@@ -71,6 +71,8 @@ spec:
               value: "{{ .Values.zebrium.bufferRetryMaxTimes }}"
             - name: BUFFER_RETRY_WAIT
               value: "{{ .Values.zebrium.bufferRetryWait }}"
+            - name: RUBY_GC_HEAP_OLDOBJECT_LIMIT_FACTOR
+              value: "{{ .Values.ruby.gcHeapOldObjectLimitFactor }}"
             - name: VERIFY_SSL
               value: "{{ .Values.zebrium.verifySSL }}"
 {{- if .Values.extraEnv }}

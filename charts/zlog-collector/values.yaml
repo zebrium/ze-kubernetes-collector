@@ -6,6 +6,9 @@ image:
 # Extra environment variables to set for log collector container
 extraEnv: []
 
+ruby:
+  gcHeapOldObjectLimitFactor: 1.2
+
 zebrium:
   name: zlog-collector
   deployment: "unset"
@@ -22,7 +25,7 @@ zebrium:
   flushInterval: "30s"
   bufferChunkLimitSize: 8MB
   bufferChunkLimitRecords: 40000
-  bufferTotalLimitSize: 8GB
+  bufferTotalLimitSize: 64GB
   bufferRetryTimeout: 1h
   bufferRetryMaxTimes: 360
   bufferRetryWait: 10s

@@ -88,13 +88,15 @@ spec:
         - name: BUFFER_CHUNK_LIMIT_RECORDS
           value: "40000"
         - name: BUFFER_TOTAL_LIMIT_SIZE
-          value: "8GB"
+          value: "64GB"
         - name: BUFFER_RETRY_TIMEOUT
           value: "1h"
         - name: BUFFER_RETRY_MAX_TIMES
           value: "360"
         - name: BUFFER_RETRY_WAIT
           value: "10s"
+        - name: RUBY_GC_HEAP_OLDOBJECT_LIMIT_FACTOR
+          value: "1.2"
         - name: VERIFY_SSL
           value: "true"
         resources:
