@@ -43,6 +43,10 @@ spec:
                 secretKeyRef:
                   name: {{ template "zlog-collector.fullname" . }}-config
                   key: auth-token
+            - name: K8S_NODE_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: spec.nodeName
             - name: ZE_DEPLOYMENT_NAME
               value: "{{ .Values.zebrium.deployment }}"
             - name: EXCLUDE_POD_REGEX

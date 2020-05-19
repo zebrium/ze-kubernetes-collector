@@ -67,6 +67,10 @@ spec:
             secretKeyRef:
               name: zlog-collector-config
               key: auth-token
+        - name: K8S_NODE_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: spec.nodeName
         - name: ZE_DEPLOYMENT_NAME
           value: "unset"
         - name: EXCLUDE_POD_REGEX
