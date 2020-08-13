@@ -51,6 +51,10 @@ spec:
               value: "{{ .Values.zebrium.deployment }}"
             - name: EXCLUDE_POD_REGEX
               value: "{{ .Values.zebrium.excludePodRegex }}"
+            - name: EC2_API_CLIENT_TIMEOUT_SECS
+              value: "{{ .Values.zebrium.ec2ApiClientTimeoutSecs }}"
+            - name: DISABLE_EC2_META_DATA
+              value: "{{ .Values.zebrium.disableEc2MetaData }}"
             - name: TAIL_FROM_HEAD
               value: "{{ .Values.zebrium.tailFromHead }}"
             - name: FLUENTD_LOG_FILE
