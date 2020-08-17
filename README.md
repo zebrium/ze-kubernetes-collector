@@ -51,6 +51,22 @@ helm delete --purge zlog-collector
 ## Configuration
 No special configuration is required
 
+## Tunable Parameters
+<table>
+  <tr>
+    <th>Parameter</th>
+    <th>Description</th>
+    <th>Default Value</th>
+    <th>Note</th>
+  </tr>
+  <tr>
+    <td>zebrium.bufferTotalLimitSize</td>
+    <td>Total disk buffer to use on node</td>
+    <td>8GB</td>
+    <td>Use helm command line option "--set zebrium.bufferTotalLimitSize=BUFFER_SIZE" to set. BUFFER_SIZE is either in MB or GB. For example, "256MB" or "1GB" </td>
+  </tr>
+</table>
+
 ### Setup
 By default, Zebrium's kubernetes log collector will be deployed to all Nodes in your cluster and collect logs from each container.
 
