@@ -18,7 +18,7 @@ zebrium:
   ec2ApiClientTimeoutSecs: "1"
   disableEc2MetaData: "true"
   verifySSL: "true"
-  timezone: ""
+  timezone: "UTC"
   excludePodRegex: ""
   tailFromHead: "true"
   logFile: ""
