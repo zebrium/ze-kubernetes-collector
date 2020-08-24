@@ -130,9 +130,6 @@ spec:
         - name: host-etc-hostname
           mountPath: /mnt/etc/hostname
           readOnly: true
-        - name: host-etc-localtime
-          mountPath: /etc/localtime
-          readOnly: true
       volumes:
       - name: host-var-logs
         hostPath:
@@ -152,6 +149,3 @@ spec:
       - name: host-etc-hostname
         hostPath:
           path: /etc/hostname
-      - name: host-etc-localtime
-        hostPath:
-          path: /etc/localtime
