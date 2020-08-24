@@ -100,12 +100,6 @@ spec:
               readOnly: true
             - name: host-var-cache
               mountPath: /mnt/var/cache/
-            - name: host-etc-osrelease
-              mountPath: /mnt/etc/os-release
-              readOnly: true
-            - name: host-etc-hostname
-              mountPath: /mnt/etc/hostname
-              readOnly: true
             {{- if eq .Values.zebrium.timezone "" }}
             - name: host-etc-localtime
               mountPath: /etc/localtime
@@ -124,12 +118,6 @@ spec:
       - name: host-var-lib-docker
         hostPath:
           path: /var/lib/docker
-      - name: host-etc-osrelease
-        hostPath:
-          path: /etc/os-release
-      - name: host-etc-hostname
-        hostPath:
-          path: /etc/hostname
     {{- if eq .Values.zebrium.timezone "" }}
       - name: host-etc-localtime
         hostPath:
