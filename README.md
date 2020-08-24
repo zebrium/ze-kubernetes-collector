@@ -35,11 +35,15 @@ kubectl delete secret zlog-collector-config
 
 ### Installing via helm
 #### helm version 2
-1. `helm install --namespace zebrium --name zlog-collector --repo https://raw.githubusercontent.com/zebrium/ze-kubernetes-collector/master/charts zlog-collector --set zebrium.collectorUrl=YOUR_ZE_API_URL,zebrium.authToken=YOUR_ZE_API_AUTH_TOKEN,zebrium.deployment=YOUR_DEPLOYMENT_NAME`
+1. `helm install --namespace zebrium --name zlog-collector --repo https://raw.githubusercontent.com/zebrium/ze-kubernetes-collector/master/charts zlog-collector --set zebrium.collectorUrl=YOUR_ZE_API_URL,zebrium.authToken=YOUR_ZE_API_AUTH_TOKEN,zebrium.deployment=YOUR_DEPLOYMENT_NAME,zebrium.timezone=KUBERNTEST_HOST_TIMEZONE`
+
+`KUBERNTEST_HOST_TIMEZONE` is the timezone setting on kubernetes host, for example, "UTC" or "America/Los_Angeles". If this option is not provided, default value UTC will be used.
 
 #### helm version 3
 1. `kubectl create namespace zebrium`
-2. `helm install zlog-collector zlog-collector --namespace zebrium --repo https://raw.githubusercontent.com/zebrium/ze-kubernetes-collector/master/charts --set zebrium.collectorUrl=YOUR_ZE_API_URL,zebrium.authToken=YOUR_ZE_API_AUTH_TOKEN,zebrium.deployment=YOUR_DEPLOYMENT_NAME`
+2. `helm install zlog-collector zlog-collector --namespace zebrium --repo https://raw.githubusercontent.com/zebrium/ze-kubernetes-collector/master/charts --set zebrium.collectorUrl=YOUR_ZE_API_URL,zebrium.authToken=YOUR_ZE_API_AUTH_TOKEN,zebrium.deployment=YOUR_DEPLOYMENT_NAME,zebrium.timezone=KUBERNTEST_HOST_TIMEZONE`
+
+`KUBERNTEST_HOST_TIMEZONE` is the timezone setting on kubernetes host, for example, "UTC" or "America/Los_Angeles". If this option is not provided, default value UTC will be used.
 
 ### Uninstalling via helm
 
