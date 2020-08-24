@@ -49,6 +49,8 @@ spec:
                   fieldPath: spec.nodeName
             - name: ZE_DEPLOYMENT_NAME
               value: "{{ .Values.zebrium.deployment }}"
+            - name: ZE_TIMEZONE
+              value: "{{ .Values.zebrium.timezone }}"
             - name: EXCLUDE_POD_REGEX
               value: "{{ .Values.zebrium.excludePodRegex }}"
             - name: EC2_API_CLIENT_TIMEOUT_SECS
@@ -104,9 +106,11 @@ spec:
             - name: host-etc-hostname
               mountPath: /mnt/etc/hostname
               readOnly: true
+            {{- if eq .Values.zebrium.timezone "" }}
             - name: host-etc-localtime
               mountPath: /etc/localtime
               readOnly: true
+            {{- end }}
       volumes:
       - name: host-var-logs
         hostPath:
@@ -126,9 +130,11 @@ spec:
       - name: host-etc-hostname
         hostPath:
           path: /etc/hostname
+    {{- if eq .Values.zebrium.timezone "" }}
       - name: host-etc-localtime
         hostPath:
           path: /etc/localtime
+    {{- end }}
     {{- if .Values.daemonset.tolerations }}
       tolerations:
     {{ toYaml .Values.daemonset.tolerations | indent 8 }}
