@@ -74,7 +74,7 @@ spec:
         - name: ZE_DEPLOYMENT_NAME
           value: "unset"
         - name: ZE_TIMEZONE
-          value: ""
+          value: "UTC"
         - name: EXCLUDE_POD_REGEX
           value: ""
         - name: TAIL_FROM_HEAD
@@ -124,12 +124,6 @@ spec:
           readOnly: true
         - name: host-var-cache
           mountPath: /mnt/var/cache/
-        - name: host-etc-osrelease
-          mountPath: /mnt/etc/os-release
-          readOnly: true
-        - name: host-etc-hostname
-          mountPath: /mnt/etc/hostname
-          readOnly: true
       volumes:
       - name: host-var-logs
         hostPath:
@@ -143,9 +137,3 @@ spec:
       - name: host-var-lib-docker
         hostPath:
           path: /var/lib/docker
-      - name: host-etc-osrelease
-        hostPath:
-          path: /etc/os-release
-      - name: host-etc-hostname
-        hostPath:
-          path: /etc/hostname
