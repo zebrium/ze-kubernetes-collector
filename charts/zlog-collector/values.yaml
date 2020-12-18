@@ -32,6 +32,8 @@ zebrium:
   bufferRetryTimeout: 1h
   bufferRetryMaxTimes: 360
   bufferRetryWait: 10s
+  verifyK8sApiSSL: true
+  k8sApiSecretName: ""
 
 secret:
   enabled: true
@@ -45,7 +47,8 @@ resources:
     memory: 1Gi
 
 services:
-  automountServiceAccountTokenSupported: true
+  automountServiceAccountTokenSupported: false
+  automountServiceAccountToken: true
 
 updateStrategy: OnDelete
 

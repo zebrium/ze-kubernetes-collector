@@ -85,6 +85,8 @@ spec:
               value: "{{ .Values.ruby.gcHeapOldObjectLimitFactor }}"
             - name: VERIFY_SSL
               value: "{{ .Values.zebrium.verifySSL }}"
+            - name: K8S_METADATA_FILTER_VERIFY_SSL
+              value: "{{ .Values.zebrium.verifyK8sApiSSL }}"
 {{- if .Values.extraEnv }}
 {{ toYaml .Values.extraEnv | indent 12 }}
 {{- end }}
@@ -105,6 +107,11 @@ spec:
               mountPath: /etc/localtime
               readOnly: true
             {{- end }}
+            {{- if ne .Values.zebrium.k8sApiSecretName "" }}
+            - name: k8s-api-secret
+              mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+              readOnly: true
+            {{- end }}
       volumes:
       - name: host-var-logs
         hostPath:
@@ -122,6 +129,11 @@ spec:
       - name: host-etc-localtime
         hostPath:
           path: /etc/localtime
+    {{- end }}
+    {{- if ne .Values.zebrium.k8sApiSecretName "" }}
+      - name: k8s-api-secret
+        secret:
+          secretName: {{ .Values.zebrium.k8sApiSecretName }}
     {{- end }}
     {{- if .Values.daemonset.tolerations }}
       tolerations:
