@@ -54,6 +54,8 @@ updateStrategy: OnDelete
 
 daemonset:
   # Allow the DaemonSet to schedule on tainted nodes
+  # Use this helm cli option to set tolerations if necessary:
+  # --set 'daemonset.tolerations[0].operator=Equal,daemonset.tolerations[0].effect=NoSchedule,daemonset.tolerations[0].key=node-role.kubernetes.io/master'
   tolerations: []
   # Deploy on selected nodes
   nodeSelector: {}
