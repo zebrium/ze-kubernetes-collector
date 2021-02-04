@@ -103,6 +103,11 @@ spec:
               readOnly: true
             - name: host-var-cache
               mountPath: /mnt/var/cache/
+            {{- if .Values.zebrium.useHostEtcHostnameFile }}
+            - name: host-etc-hostname
+              mountPath: /mnt/etc/hostname
+              readOnly: true
+            {{- end }}
             {{- if eq .Values.zebrium.timezone "" }}
             - name: host-etc-localtime
               mountPath: /etc/localtime
@@ -126,6 +131,11 @@ spec:
       - name: host-var-lib-docker
         hostPath:
           path: /var/lib/docker
+    {{- if .Values.zebrium.useHostEtcHostnameFile }}
+      - name: host-etc-hostname
+        hostPath:
+          path: /etc/hostname
+    {{- end }}
     {{- if eq .Values.zebrium.timezone "" }}
       - name: host-etc-localtime
         hostPath:
