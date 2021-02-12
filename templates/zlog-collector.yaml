@@ -72,7 +72,7 @@ spec:
             fieldRef:
               fieldPath: spec.nodeName
         - name: ZE_DEPLOYMENT_NAME
-          value: "unset"
+          value: "default"
         - name: ZE_TIMEZONE
           value: "UTC"
         - name: EXCLUDE_POD_REGEX

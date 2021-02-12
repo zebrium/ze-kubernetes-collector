@@ -11,7 +11,7 @@ ruby:
 
 zebrium:
   name: zlog-collector
-  deployment: "unset"
+  deployment: "default"
   collectorUrl: ""
   authToken: ""
   autoupdate: "1"
