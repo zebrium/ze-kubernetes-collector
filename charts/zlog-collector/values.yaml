@@ -63,3 +63,12 @@ daemonset:
   priorityClassName: ""
   dnsPolicy: "ClusterFirst"
 
+psp:
+  enabled: true
+  privileged: false
+  #Prevent escalations to root.
+  allowPrivilegeEscalation: false
+  readOnlyRootFilesystem:  false
+  hostNetwork: false
+  hostIPC: false
+  hostPID: false
