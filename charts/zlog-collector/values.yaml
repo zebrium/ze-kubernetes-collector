@@ -52,7 +52,7 @@ services:
   automountServiceAccountTokenSupported: false
   automountServiceAccountToken: true
 
-updateStrategy: RollingUpdate
+updateStrategy: OnDelete
 
 daemonset:
   # Allow the DaemonSet to schedule on tainted nodes
