@@ -70,6 +70,12 @@ No special configuration is required
     <td>8GB</td>
     <td>Use helm command line option "--set zebrium.bufferTotalLimitSize=BUFFER_SIZE" to set. BUFFER_SIZE is either in MB or GB. For example, "256MB" or "1GB" </td>
   </tr>
+  <tr>
+    <td>zebrium.flushThreadCount</td>
+    <td>The number of threads to flush the buffer.</td>
+    <td>4</td>
+    <td>If the destination of your logs is remote storage or service, adding a flush_thread_count option will parallelize your outputs (the default is 4). Using multiple threads can hide the IO/network latency </td>
+  </tr>
 </table>
 
 ### Setup
