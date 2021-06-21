@@ -96,3 +96,4 @@ In the event that Zebrium requires the ze_collector logs for troubleshooting, yo
 
 ## Contributors
 * Brady Zuo (Zebrium)
+* Braeden Earp (Zebrium)
