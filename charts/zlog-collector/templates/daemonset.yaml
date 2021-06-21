@@ -70,6 +70,8 @@ spec:
               value: {{quote .Values.zebrium.excludePath }}
             - name: FLUSH_INTERVAL
               value: "{{ .Values.zebrium.flushInterval }}"
+            - name: FLUSH_THREAD_COUNT
+              value: "{{ .Values.zebrium.flushThreadCount }}"
             - name: BUFFER_CHUNK_LIMIT_SIZE
               value: "{{ .Values.zebrium.bufferChunkLimitSize }}"
             - name: BUFFER_CHUNK_LIMIT_RECORDS
