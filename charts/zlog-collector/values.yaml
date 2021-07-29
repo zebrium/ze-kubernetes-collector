@@ -35,6 +35,7 @@ zebrium:
   bufferRetryWait: 10s
   verifyK8sApiSSL: true
   k8sApiSecretName: ""
+  pathMapFile: ""
   useHostEtcHostnameFile: false
 
 secret:

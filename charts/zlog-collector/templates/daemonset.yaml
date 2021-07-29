@@ -88,12 +88,20 @@ spec:
               value: "{{ .Values.ruby.gcHeapOldObjectLimitFactor }}"
             - name: VERIFY_SSL
               value: "{{ .Values.zebrium.verifySSL }}"
+{{- if ne .Values.zebrium.pathMapFile "" }}
+            - name: ZE_PATH_MAP_FILE
+              value: {{- (print " /mnt/filepathmap.d/" .Values.zebrium.pathMapFile) }}
+{{- end }}
             - name: K8S_METADATA_FILTER_VERIFY_SSL
               value: "{{ .Values.zebrium.verifyK8sApiSSL }}"
 {{- if .Values.extraEnv }}
 {{ toYaml .Values.extraEnv | indent 12 }}
 {{- end }}
           volumeMounts:
+{{- if ne .Values.zebrium.pathMapFile "" }}
+            - name: file-path-map-cm
+              mountPath: /mnt/filepathmap.d/
+{{- end }}
             - name: host-var-logs
               mountPath: /var/log/
               readOnly: true
@@ -133,6 +141,11 @@ spec:
       - name: host-var-lib-docker
         hostPath:
           path: /var/lib/docker
+    {{- if ne .Values.zebrium.pathMapFile "" }}
+      - name: file-path-map-cm
+        configMap:
+          name: filepathmap-cm
+    {{- end }}
     {{- if .Values.zebrium.useHostEtcHostnameFile }}
       - name: host-etc-hostname
         hostPath:

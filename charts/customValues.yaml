@@ -1,0 +1,12 @@
+overridePMFConfig: true
+zebrium:
+  pathMapFile: "pathMapFile.json"
+customPMFConfig: {
+  "mappings": {
+    "patterns":["/var/log/remote_logs/(?<host>[^/]+)/.*"],
+    "tags": [],
+    "ids" : [
+        "host"],
+    "configs": []
+  }
+}

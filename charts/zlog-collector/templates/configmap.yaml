@@ -1,0 +1,17 @@
+apiVersion: v1 
+kind: ConfigMap 
+metadata:
+  name: filepathmap-cm
+  namespace: {{ .Release.Namespace }}
+data:
+{{- "\n" }}
+{{- if ne .Values.zebrium.pathMapFile "" }}
+{{- .Values.zebrium.pathMapFile | indent 2 -}}: |
+{{- "\n" }}
+{{- if .Values.overridePMFConfig}}
+{{- toRawJson .Values.customPMFConfig | indent 4 }}
+{{- else }}
+{{- .Files.Get (print .Values.zebrium.pathMapFile) | indent 4 }}
+{{- end }}
+{{- "\n" }}
+{{ end }}
