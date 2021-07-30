@@ -78,6 +78,18 @@ No special configuration is required
   </tr>
 </table>
 
+### Log Path Mapping
+Log path mapping is the process of detecting semantic items in log file paths (ids, configs and tags)
+then including them in the Zebrium log data. This is enabled by providing a JSON mapping file to
+the log collector, as described in the repo at https://www.github.com/zebrium/ze-fluentd-plugin. To use this functionality with the supplied
+helm chart a **customValues.yaml** file should be completed and supplied to the **helm install**
+command line with:
+
+```
+helm install ... -f customValues.yaml ...
+``` 
+
+A prototype customValues.yaml file is provided in the repo.
 ### Setup
 By default, Zebrium's kubernetes log collector will be deployed to all Nodes in your cluster and collect logs from each container.
 
@@ -97,3 +109,4 @@ In the event that Zebrium requires the ze_collector logs for troubleshooting, yo
 ## Contributors
 * Brady Zuo (Zebrium)
 * Braeden Earp (Zebrium)
+* Rob Fair (Zebrium)
