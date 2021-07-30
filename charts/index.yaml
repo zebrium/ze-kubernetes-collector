@@ -2,10 +2,10 @@ apiVersion: v1
 entries:
   zlog-collector:
   - apiVersion: v1
-    appVersion: 1.49.0
-    created: 2021-02-11T16:14:09.857310299-08:00
+    appVersion: 1.50.0
+    created: "2021-07-30T13:41:05.662866896-07:00"
     description: Zebrium log collector daemonset for Kubernetes.
-    digest: 2d2cf6b0a1370fbe3b5cff45a2467bff4f4bd5c21ed9bc38886445b162e22877
+    digest: f117826312fa04ebc10e2fd0241aba5948794167f6f0ddabac7209af77705387
     home: https://www.zebrium.com
     icon: https://www.zebrium.com/hubfs/logo2.png
     keywords:
@@ -23,6 +23,6 @@ entries:
     sources:
     - https://github.com/zebrium/ze-kubernetes-collector
     urls:
-    - https://github.com/zebrium/ze-kubernetes-collector/releases/download/1.49.0/zlog-collector-1.49.0.tgz
-    version: 1.49.0
-generated: 2021-02-11T16:14:09.857015835-08:00
+    - https://github.com/zebrium/ze-kubernetes-collector/releases/download/1.50.0/zlog-collector-1.50.0.tgz
+    version: 1.50.0
+generated: "2021-07-30T13:41:05.662328792-07:00"
