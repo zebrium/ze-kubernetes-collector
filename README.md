@@ -89,7 +89,23 @@ command line with:
 helm install ... -f customValues.yaml ...
 ``` 
 
-A prototype customValues.yaml file is provided in the repo.
+A prototype customValues.yaml file is provided in the repo, with format:
+
+```
+overridePMFConfig: true
+zebrium:
+  pathMapFile: "pathMapFile.json"
+customPMFConfig: {
+  "mappings": {
+    "patterns":["/var/log/remote_logs/(?<host>[^/]+)/.*"],
+    "tags": [],
+    "ids" : [
+        "host"],
+    "configs": []
+  }
+}
+```
+
 ### Setup
 By default, Zebrium's kubernetes log collector will be deployed to all Nodes in your cluster and collect logs from each container.
 
