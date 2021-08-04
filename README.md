@@ -76,6 +76,12 @@ No special configuration is required
     <td>4</td>
     <td>If the destination of your logs is remote storage or service, adding a flush_thread_count option will parallelize your outputs (the default is 4). Using multiple threads can hide the IO/network latency </td>
   </tr>
+  <tr>
+    <td>zebrium.nodeLogsPath</td>
+    <td>A list of log files to process.</td>
+    <td>/var/log/*.log, /var/log/syslog, /var/log/messages, /var/log/secure</td>
+    <td>List must not have spaces.</td>
+  </tr>
 </table>
 
 ### Log Path Mapping
