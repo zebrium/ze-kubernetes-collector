@@ -12,8 +12,7 @@ Our github repository is located [here](https://github.com/zebrium/ze-kubernetes
 
 ### Installing via helm
 #### helm version 3
-1. `kubectl create namespace zebrium`
-2. `helm install zlog-collector zlog-collector --namespace zebrium --repo https://raw.githubusercontent.com/zebrium/ze-kubernetes-collector/master/charts --set zebrium.collectorUrl=YOUR_ZE_API_URL,zebrium.authToken=YOUR_ZE_API_AUTH_TOKEN,zebrium.deployment=YOUR_DEPLOYMENT_NAME,zebrium.timezone=KUBERNETES_HOST_TIMEZONE`
+1. `helm upgrade -i zlog-collector zlog-collector --namespace zebrium --create-namespace --repo https://raw.githubusercontent.com/zebrium/ze-kubernetes-collector/master/charts --set zebrium.collectorUrl=YOUR_ZE_API_URL,zebrium.authToken=YOUR_ZE_API_AUTH_TOKEN,zebrium.deployment=YOUR_DEPLOYMENT_NAME,zebrium.timezone=KUBERNETES_HOST_TIMEZONE`
 
 `KUBERNETES_HOST_TIMEZONE` is the timezone setting on kubernetes host, for example, "UTC" or "America/Los_Angeles". If this option is not provided, default value UTC will be used.
 
@@ -25,8 +24,14 @@ Our github repository is located [here](https://github.com/zebrium/ze-kubernetes
 ### Uninstalling via helm
 
 If you used the "helm install" command to install zlog-collector chart, you should use the following command to delete:
+#### helm version 3
 ```
-helm delete --purge zlog-collector
+helm delete zlog-collector -n zebrium
+```
+
+#### helm version 2
+```
+helm delete --purge zlog-collector -n zebrium
 ```
 
 ### Installing via kubectl
@@ -82,6 +87,55 @@ No special configuration is required
     <td>/var/log/*.log, /var/log/syslog, /var/log/messages, /var/log/secure</td>
     <td>List must not have spaces.</td>
   </tr>
+  <tr>
+    <td>zebrium.deployment</td>
+    <td>Identifies the environment or deployment. E.g. "production", "qa", "dev".</td>
+    <td>default</td>
+    <td>Default value allows the logs to be treated as a shared service and to span multiple Environments or Deployments</td>
+  </tr>
+  <tr>
+    <td>zebrium.collectorUrl</td>
+    <td>Url of the Zebrium Log Collector Endpoint</td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>zebrium.authToken</td>
+    <td>Zebrium Authentication Token needed to interact with the Collection API</td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>zebrium.verifySSL</td>
+    <td>Boolean flag to enable or disables SSL verification on connection with the collectors. </td>
+    <td>true</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>zebrium.timezone</td>
+    <td>Time Zone of the Collector</td>
+    <td>UTC</td>
+    <td>You can use the ENV Variable KUBERNETES_HOST_TIMEZONE to use the Timezone of the k8s cluster</td>
+  </tr>
+  <tr>
+    <td>zebrium.excludePodRegex</td>
+    <td>Regex to exlude pods from collection</td>
+    <td></td>
+    <td>EX. "^fluentbit.*" would exclude all fluentbit pods from collection</td>
+  </tr>
+  <tr>
+    <td>zebrium.excludePath</td>
+    <td>Excludes Path of Logs from collection if they reside in the directories specified in zebrium.nodeLogsPath </td>
+    <td>[\"/var/log/boot.log\",\"/var/log/lastlog\"]</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>zebrium.tailFromHead</td>
+    <td>Boolean to enable the tailing of logs from the head of the file.  If false, logs will only be streamed from the current point of time.</td>
+    <td>true</td>
+    <td></td>
+  </tr>
+
 </table>
 
 ### Log Path Mapping
