@@ -48,6 +48,8 @@ spec:
               valueFrom:
                 fieldRef:
                   fieldPath: spec.nodeName
+            - name: ZE_HANDLE_HOST_AS_CONFIG
+              value: "{{ .Values.zebrium.handleHostAsConfig }}"
             - name: ZE_DEPLOYMENT_NAME
               value: "{{ .Values.zebrium.deployment }}"
             - name: ZE_TIMEZONE

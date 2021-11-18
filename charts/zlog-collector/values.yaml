@@ -25,6 +25,7 @@ zebrium:
   logLevel: "info"
   nodeLogsPath: "/var/log/*.log,/var/log/syslog,/var/log/messages,/var/log/secure"
   excludePath: "[\"/var/log/boot.log\",\"/var/log/lastlog\"]"
+  handleHostAsConfig: false
   flushInterval: "30s"
   flushThreadCount: "4"
   bufferChunkLimitSize: 8MB
