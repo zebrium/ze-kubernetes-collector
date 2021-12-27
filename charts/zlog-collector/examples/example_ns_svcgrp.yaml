@@ -1,0 +1,8 @@
+overrideSVCGRPConfig: true
+zebrium:
+  svcgrpMapFile: "svcgrpMapFile.json"
+customSVCGRPConfig: {
+  "mynamespace1" : "svcgrp1",
+  "mynamespace2" : "svcgrp1",
+  "mynamespace3" : "svcgrp3"
+}

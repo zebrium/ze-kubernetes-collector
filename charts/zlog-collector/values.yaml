@@ -38,6 +38,7 @@ zebrium:
   k8sApiSecretName: ""
   pathMapFile: ""
   useHostEtcHostnameFile: false
+  svcgrpMapFile: ""
 
 secret:
   enabled: true
@@ -57,6 +58,7 @@ services:
 updateStrategy: OnDelete
 
 daemonset:
+  tolerateAllTaints: false
   # Allow the DaemonSet to schedule on tainted nodes
   # Use this helm cli option to set tolerations if necessary:
   # --set 'daemonset.tolerations[0].operator=Equal,daemonset.tolerations[0].effect=NoSchedule,daemonset.tolerations[0].key=node-role.kubernetes.io/master'

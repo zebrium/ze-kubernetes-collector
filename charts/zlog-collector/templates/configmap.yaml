@@ -15,3 +15,22 @@ data:
 {{- end }}
 {{- "\n" }}
 {{ end }}
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: ns-svcgrp-cm
+  namespace: {{ .Release.Namespace }}
+data:
+  {{- "\n" }}
+  {{- if ne .Values.zebrium.svcgrpMapFile "" }}
+  {{- .Values.zebrium.svcgrpMapFile | indent 2 -}}: |
+  {{- "\n" }}
+    {{- if .Values.overrideSVCGRPConfig}}
+      {{- toRawJson .Values.customSVCGRPConfig | indent 4 }}
+    {{- else }}
+      {{- .Files.Get (print .Values.zebrium.svcgrpMapFile) | indent 4 }}
+    {{- end }}
+  {{- "\n" }}
+  {{ end }}
+---

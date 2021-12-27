@@ -149,7 +149,7 @@ command line with:
 helm install ... -f customValues.yaml ...
 ``` 
 
-A prototype customValues.yaml file is provided in the repo, with format:
+A prototype example_logPathMappings.yaml file is provided in the repo under the example directory, with format:
 
 ```
 overridePMFConfig: true
@@ -165,7 +165,28 @@ customPMFConfig: {
   }
 }
 ```
+### Custom Namespace to Service Group Mapping
+Custom Namespace to Service Group Matching is the process of dynamically assigning a service group to a log stream based on the resources namesapce. This is enabled by providing a JSON mapping file to
+the log collector. To use this functionality with the supplied
+helm chart a **customValues.yaml** file should be completed and supplied to the **helm install**
+command line with:
 
+```
+helm install ... -f customValues.yaml ...
+``` 
+
+A prototype example_ns_svcgrp.yaml file is provided in the repo under the example directory, with format:
+
+```
+overrideSVCGRPConfig: true
+zebrium:
+  svcgrpMapFile: "svcgrpMapFile.json"
+customSVCGRPConfig: {
+  "mynamespace1" : "svcgrp1", 
+  "mynamespace2" : "svcgrp1", 
+  "mynamespace3" : "svcgrp3"
+}
+```
 ### Setup
 By default, Zebrium's kubernetes log collector will be deployed to all Nodes in your cluster and collect logs from each container.
 

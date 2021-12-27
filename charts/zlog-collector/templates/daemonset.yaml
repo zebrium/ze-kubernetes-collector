@@ -94,6 +94,10 @@ spec:
             - name: ZE_PATH_MAP_FILE
               value: {{- (print " /mnt/filepathmap.d/" .Values.zebrium.pathMapFile) }}
 {{- end }}
+{{- if ne .Values.zebrium.svcgrpMapFile "" }}
+            - name: ZE_NS_SVCGRP_MAP_FILE
+              value: {{- (print " /mnt/svcgrpmapfile.d/" .Values.zebrium.svcgrpMapFile) }}
+{{- end }}
             - name: K8S_METADATA_FILTER_VERIFY_SSL
               value: "{{ .Values.zebrium.verifyK8sApiSSL }}"
 {{- if .Values.extraEnv }}
@@ -104,6 +108,10 @@ spec:
             - name: file-path-map-cm
               mountPath: /mnt/filepathmap.d/
 {{- end }}
+            {{- if ne .Values.zebrium.svcgrpMapFile "" }}
+            - name: ns-svc-grp-cm
+              mountPath: /mnt/svcgrpmapfile.d/
+            {{- end }}
             - name: host-var-logs
               mountPath: /var/log/
               readOnly: true
@@ -139,7 +147,7 @@ spec:
           path: /run/log
       - name: host-var-cache
         hostPath:
-          path: /var/cache
+          path: {{ template "zlog-collector.cache" .}}
       - name: host-var-lib-docker
         hostPath:
           path: /var/lib/docker
@@ -147,6 +155,11 @@ spec:
       - name: file-path-map-cm
         configMap:
           name: filepathmap-cm
+    {{- end }}
+    {{- if ne .Values.zebrium.svcgrpMapFile "" }}
+      - name: ns-svc-grp-cm
+        configMap:
+          name: ns-svcgrp-cm
     {{- end }}
     {{- if .Values.zebrium.useHostEtcHostnameFile }}
       - name: host-etc-hostname
@@ -165,6 +178,15 @@ spec:
     {{- end }}
     {{- if .Values.daemonset.tolerations }}
       tolerations:
+        {{- if .Values.daemonset.tolerateAllTaints }}
+        - operator: Exists
+        {{- else }}
+        - key: CriticalAddonsOnly
+          operator: Exists
+        - operator: Exists
+          effect: NoExecute
+          tolerationSeconds: 300
+      {{- end }}
 {{ toYaml .Values.daemonset.tolerations | indent 8 }}
     {{- end }}
     {{- if .Values.daemonset.nodeSelector }}

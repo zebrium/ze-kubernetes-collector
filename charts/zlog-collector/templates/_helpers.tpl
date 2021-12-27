@@ -30,3 +30,6 @@ Create chart name and version as used by the chart label.
 {{- define "zlog-collector.chart" -}}
   {{- printf "%s-%s" .Chart.Name .Chart.Version | replace "+" "_" | trunc 63 | trimSuffix "-" -}}
 {{- end -}}
+{{- define "zlog-collector.cache" -}}
+    {{- printf "/var/cache/%s" .Release.Namespace -}}
+{{- end -}}
