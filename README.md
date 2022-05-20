@@ -1,3 +1,8 @@
+#DEPRECATED: This is repo is currently depricated in the helm chart has been moved [here](https://github.com/zebrium/helm-charts/tree/main/charts/zlog-collector)
+
+[![No Maintenance Intended](http://unmaintained.tech/badge.svg)](http://unmaintained.tech/)
+
+
 # KUBERNETES COLLECTOR DETAILS
 Zebrium's Kubernetes collector sends logs to Zebrium for automated Anomaly detection.
 Our github repository is located [here](https://github.com/zebrium/ze-kubernetes-collector).
